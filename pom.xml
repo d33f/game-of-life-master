@@ -11,6 +11,7 @@
         <build.number>SNAPSHOT</build.number>
         <!-- Input Parameter - GlassFish properties file -->
         <glassfish.properties.file.argument></glassfish.properties.file.argument>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <easyb.version>1.4</easyb.version>
         <cobertura.version>2.6</cobertura.version>
@@ -144,13 +145,22 @@
                     <api_hoster>app.jelastic.servint.net</api_hoster>
                 </configuration>
             </plugin>
-            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
+                <configuration>
+                    <files>
+                        <file>${basedir}/properties/${glassfish.properties.file.argument}.properties</file>
+                    </files>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.glassfish.maven.plugin</groupId>
                 <artifactId>maven-glassfish-plugin</artifactId>
                 <version>2.1</version>
                 <configuration>
-                    <glassfishDirectory>${GLASSFISH_HOME}</glassfishDirectory>
+                    <glassfishDirectory>C:\\Program Files\\glassfish-4.1\\glassfish\\</glassfishDirectory>
                     <user>${glassfish.user}</user>
                     <passwordFile>${basedir}/passwords/${glassfish.pwdfile}</passwordFile>
                     <echo>true</echo>
@@ -164,7 +174,7 @@
                     <components>
                         <component>
                             <name>${project.artifactId}</name>
-                            <artifact>${project.build.directory}/${project.build.finalName}.war</artifact>
+                            <artifact>gameoflife-web/target/gameoflife.war</artifact>
                         </component>
                     </components>
                 </configuration>  
@@ -252,18 +262,18 @@
                 <plugins>
                     <!-- CHECKSTYLE -->
                     <!--<plugin>-->
-                        <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
-                        <!--<version>2.9.1</version>-->
-                        <!--<dependencies>-->
-                            <!--<dependency>-->
-                                <!--<groupId>com.wakaleo.gameoflife</groupId>-->
-                                <!--<artifactId>gameoflife-build</artifactId>-->
-                                <!--<version>${project.version}</version>-->
-                            <!--</dependency>-->
-                        <!--</dependencies>-->
-                        <!--<configuration>-->
-                            <!--<configLocation>custom-checkstyle.xml</configLocation>-->
-                        <!--</configuration>-->
+                    <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
+                    <!--<version>2.9.1</version>-->
+                    <!--<dependencies>-->
+                    <!--<dependency>-->
+                    <!--<groupId>com.wakaleo.gameoflife</groupId>-->
+                    <!--<artifactId>gameoflife-build</artifactId>-->
+                    <!--<version>${project.version}</version>-->
+                    <!--</dependency>-->
+                    <!--</dependencies>-->
+                    <!--<configuration>-->
+                    <!--<configLocation>custom-checkstyle.xml</configLocation>-->
+                    <!--</configuration>-->
                     <!--</plugin>-->
 
                     <!-- PMD -->
